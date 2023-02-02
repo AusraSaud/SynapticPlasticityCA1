@@ -1,7 +1,8 @@
 import numpy as np
 
 class PinskyRinzel_ca1():
-    def __init__(self, dt=0.01):
+    def __init__(self, dt=0.01, save_last_record_only=True):
+        self.save_last_record_only = save_last_record_only
         self.dt=dt
 
         self.VL=-65
@@ -196,9 +197,10 @@ class PinskyRinzel_ca1():
         self.Cad_soma = self.Cad_soma + self.delta_Cad_soma * self.dt
         self.Cad_dend = self.Cad_dend + self.delta_Cad_dend * self.dt
 
+        if not self.save_last_record_only:
+            self.save_records()
 
-
-
+    def save_records(self):
         self.t_plot.append(self.t)
         self.IKdr_soma_plot.append(self.IKdr_soma)
         self.INa_soma_plot.append(self.INa_soma)
