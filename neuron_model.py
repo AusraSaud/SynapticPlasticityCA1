@@ -1,6 +1,6 @@
 import numpy as np
 
-class PinskyRinzel_ca1():
+class CA1_NeuronModel():
     def __init__(self, dt=0.01, save_last_record_only=True):
         self.save_last_record_only = save_last_record_only
         self.dt=dt
@@ -30,7 +30,6 @@ class PinskyRinzel_ca1():
         self.gKahp_soma = 0.8
         self.gKC_soma = 15
 
-
         self.hs = 0.999  
         self.ns = 0.001 
         self.qd = 0.010 
@@ -44,10 +43,8 @@ class PinskyRinzel_ca1():
 
         self.ICad = self.gCa_dend * self.sd * self.sd * (self.Vdend - self.VCa)
 
-
         self.Cad_soma = 0.2
         self.Cad_dend = 0.2
-
 
         self.Ileakage_soma = 0.5803 
         self.INa_soma = 0.0662
@@ -214,8 +211,4 @@ class PinskyRinzel_ca1():
         self.Icoupl_dend_plot.append(self.Icoupl_dend)
 
         self.Iext_plot.append(self.Ip0)
-        
-        
-
-        
         

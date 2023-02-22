@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class Destexhe_AMPA:
+class Synapse_AMPA:
     def __init__(self, dt, ampabar = 1):
         self.Cdur = 1
         self.gampa_bar = ampabar

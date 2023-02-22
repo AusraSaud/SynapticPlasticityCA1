@@ -50,22 +50,13 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         #Fig 2 columns STDP
         #------------------------------
 
-        starts = [800, 900] #AS
-        
-        
-        #starts = [890, 990]
-        #simlen = [400, 400] 
-
+        starts = [800, 900]
 
         #-------------
         #Plot Vmem
         #-------------
-        #simlen = [100*10000, 100*10000] #AS        
+        simlen = [100*400, 100*400]
         
-        simlen = [100*400, 100*400] #AS        
-        
-        
-        #X_ylim = (-0.001, 0.10)
         X_ylim = (-0.001, 1)
    
         
@@ -73,7 +64,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         v_ylim = [(-71, 90), (-71, 90)]
         
         #A2 gnmda
-        #nmda_ylim = [(0.0, 0.05*5e-3), (0.0, 0.2*0.05*5e-3)]
         nmda_ylim = [(0.0, 150e-6), (0.0, 150e-6 )]
                 
         #A3 gnmda trace or V  
@@ -81,12 +71,11 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         #vtracelim = [(0, 10), (0, 10)] #Vmem traces 
 
         #A4 Theta Hill
-        hilllimL = [(0, 2.1e-4), (0, (2.1e-4) )] #AS gtrace left column LTP
-        hilllimR = [(0, 0.1e-2), (0, 0.1e-2 )]   #AS gtrace right column
+        hilllimL = [(0, 2.1e-4), (0, (2.1e-4) )] # gtrace left column LTP
+        hilllimR = [(0, 0.1e-2), (0, 0.1e-2 )]   # gtrace right column
         
         #A5 Weight
-        #weightlim = [(0.8, 1.8), (0.9, 1.8)] #AS
-        weightlim = [(1, 1.05), (0.98, 1.)] #AS
+        weightlim = [(1, 1.05), (0.98, 1.)]
 
 
         ymarginbottom = 0.05
@@ -100,19 +89,16 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
 
     else:
 
-        #Fig 5 Helene traces
+        #Fig 5 traces
 
         starts = [2890, 2990]
         simlen = [2000, 11000]
-
-        #simlen = [2000, 11000]
 
         v_ylim = [(-71, 70), (-71, -65)]
         X_ylim = (-0.001, 0.10)
         nmda_ylim = [(0.0, 0.4), (0.0, 0.4 * 0.1)]
 
-        #V or g traces 
-        #vtracelim = [(0, 25), (0, 25 * 0.1)]
+        #V or g traces
         vtracelim = [(0, 25), (0, 25 * 0.1)]
 
         #Phi Theta
@@ -165,11 +151,9 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
 
         c0 = (0.8, 0.1, 0.1)  # delta trace
         c1 = (0.0, 0.0, 0.0)  # vmem
-        color1='darkgreen'#'mediumblue' #'dodgerblue'# 'lawngreen' #'purple' #'indigo' #'darkmagenta'
-        #color0='darkviolet'
+        color1='darkgreen'
         color2='red'
-        #color1='forestgreen'
-        color3 = 'cyan'  # gNMDA nr2cd # AS
+        color3 = 'cyan'        # gNMDA nr2cd
 
         c11 = (0.2, 0.9, 0.2)  # thresh ltp
         c12 = (0.9, 0.2, 0.2)  # thresh ltd
@@ -202,11 +186,9 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         l21 = r"$\overline{g}_{NMDA_{+}}$"
               
         l22 = r"$\overline{g}_{NMDA_{-}}$"
-        #l23 = r"$\overline{g}_{NMDA_{CD}}$"
 
         l31 = r"$\Phi_{NMDA_{+}}$"
         l32 = r"$\Phi_{NMDA_{-}}$"
-        #l33 = r"$\Phi_{NMDA_{CD}}$"
 
         l41 = r"$g_{NMDA_{GluN2A}}$"
         l42 = r"$g_{NMDA_{GluN2B}}$"
@@ -216,12 +198,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         l4 = r"$\overline{g}_{nmda}$"
         l5 = r"$\omega$"
 
-        #stop_subplotsAB=3000 #300 ms
-
-        #n=np.shape(data["v"][start:stop_subplotsAB])
-        #print(n)
-        
-
 
         start_ax01 = start
         stop_ax01 = stop
@@ -229,19 +205,12 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         t_ax01 = t
         if "reduce_X_axis" in options:
             start_ax01 = start_ax01 - 500+450
-            stop_ax01 = 3000 - start_ax01-500-50  # AS
-            #start_ax01 = start_ax01 - 500
-            #stop_ax01 = 3000 - start_ax01
+            stop_ax01 = 3000 - start_ax01-500-50
             tstart_ax01_delta = int(start_ax01/10)
             t_ax01 = np.array(data["t"][start_ax01:stop_ax01]) - tstart_ax01_delta
-            
 
         lineax01 = axs[0][axnum].plot(t_ax01, data["v"][start_ax01:stop_ax01], c='blue', label=l1, linewidth=linewidth)
         lineax011 = axs[0][axnum].plot(t_ax01, data["v_soma"][start_ax01:stop_ax01], c=c1, label=l2, linewidth=linewidth)
-        
-
-        #lineax01 = axs[0][axnum].plot(t[0:n_time_stop], data["v"][start:stop_subplotsAB], c='red', label=l1, linewidth=linewidth)
-        #lineax011 = axs[0][axnum].plot(t[0:n_time_stop], data["v_soma"][start:stop_subplotsAB], c=c1, label=l2, linewidth=linewidth)
         
         if enable_stdp:
             pre_x = [t[np.argmax(data["dirac_trace"][start_ax01:stop_ax01])]]
@@ -262,12 +231,9 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
 
 
 
-        #-------------                
+        #-------------
         
         if enable_stdp:
-
-            
-            
             annotate_dt = 40
             if "dt" in options:
                 annotate_dt = options['dt']
@@ -305,25 +271,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         axs[1][axnum].plot(t_ax01, data["g_nr2b"]
                          [start_ax01:stop_ax01], c=color1, label=l42, linewidth=linewidth)
       
-        #axs[1][axnum].plot(t[0:n_time_stop], data["g_nr2a"]
-        #                 [start:stop_subplotsAB], c=color2, label=l41, linewidth=linewidth)
-        #axs[1][axnum].plot(t[0:n_time_stop], data["g_nr2b"]
-        #                 [start:stop_subplotsAB], c=color1, label=l42, linewidth=linewidth)
-        
-        #AS
-        #axs[1][axnum].plot(t, data["g_nr2cd"]
-        #                  [start:stop], c=color3, label=l43, linewidth=linewidth)
-
-        #-----------------------------------------------
-
-        #JS Vmem traces 2
-        #axs[2][axnum].plot(t, data["v_trace1_threshed1"]
-        #                 [start:stop], c=color1, label=l21, linewidth=linewidth)
-        #axs[2][axnum].plot(t, data["v_trace2_threshed2"]
-        #                 [start:stop], c=color2, label=l22, linewidth=linewidth)
-        #axs[2][axnum].plot(t, data["v_trace3_threshed3"]
-        #                 [start:stop], c=color3, label=l23, linewidth=linewidth)
-
         #-------------------------------------------------------------------------------   
         #gnmda traces 1 - AB LT, 2 - AB LTD, 3 - CD LTD 
         #-------------------------------------------------------------------------------   
@@ -333,12 +280,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         axs[2][axnum].plot(t, data["g_nmda_trace1"]
                          [start:stop], c=color1, label=l21, linewidth=linewidth)
        
-
-        #axs[2][axnum].plot(t, data["g_nmda_trace3"]
-        #                 [start:stop], c=color3, label=l23, linewidth=linewidth)
-
-
-       #print(np.array(data))
 
         #-------------------------------------------------------------------------------   
         #Hill 1 - AB LT, 2 - AB LTD, 
@@ -352,24 +293,11 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         lineax32 = ax3twin.plot(t, np.array(data["hilleq_ltd"]
                                  [start:stop]), c=color2, label=l32, linewidth=linewidth) #c=c23
         
-        #lineax33 = axs[3][axnum].plot(t, np.array(data["hilleq_ltd_cd"] 
-        #                 [start:stop]), c=color3, label=l33, linewidth=linewidth)  #c=c31
-
-        # instantiate a second axes that shares the same x-axis
-
-        
-
-
-    
         #-------------------------------------------------------------------------------   
         #Weights
         #-------------------------------------------------------------------------------   
 
         axs[4][axnum].plot(t, np.array(data["weight"][start:stop]) - data["weight"][start]+1, c=c5, label=l5, linewidth=linewidth)
-        #axs[4][col].plot(t, np.array(data["g_nmda_trace1"][start:stop]) * 1000, c=c4, label=l4)
-
-        #AS
-        #print(np.array(data["weight"][-1]))
 
         if col == 1 and not enable_stdp:
             timestart -= tstart_delta
@@ -381,7 +309,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
                 ax[axnum].set_xticks(xticks)
                 ax[axnum].set_xticklabels(xticklabels)
         
-        #axs[0].set_ylabel("\delta trace")
         axs[0][axnum].set_ylabel("mV", fontsize=label_size)
         axs[1][axnum].set_ylabel("nS", fontsize=label_size)
         lines00, labels00 = axs[0][axnum].get_legend_handles_labels()
@@ -411,18 +338,9 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
         axs[0][axnum].xaxis.label.set_color(c111[1])
         axs[0][axnum].tick_params(axis='y', colors=c111[1])
 
-        #colors of A4 
-        #axs[3][axnum].xaxis.label.set_color(c2[0])
-        #axs[3][axnum].tick_params(axis='y', colors=c2[0])
-
         axs[3][axnum].xaxis.label.set_color(color1)
         axs[3][axnum].tick_params(axis='y', colors=color1)
 
-        #colors of A4 twin axis
-        #ax3twin.xaxis.label.set_color(c2[1])
-        #ax3twin.tick_params(axis='y', colors=c2[1])
-
-        #AS
         ax3twin.xaxis.label.set_color(color2)
         ax3twin.tick_params(axis='y', colors=color2)
 
@@ -459,10 +377,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
 
         set_ymargin(axs[4][axnum], ymarginbottom2, ymargintop)
 
-        #delete
-        #set_xmargin(axs[4][axnum], 0, 1)
-        #axs[4][axnum].set_xlabel("time (ms)", fontsize=label_size)
-
     plt.tight_layout()
 
     if (filename != ""):
@@ -474,8 +388,6 @@ def plot_generic_2columns(datas, enable_stdp=False, filename="", options={}):
 #-------------------------------------------------------------------
 #3 Columns
 #-------------------------------------------------------------------
-
-
 def plot_generic_3columns(datas, enable_stdp=False, filename=""):
     linewidth = 3
     label_size = 20
@@ -499,9 +411,6 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
         starts = [890, 990]
         simlen = [400, 400]
 
-        #simlen = [4000, 4000]
-
-
         v_ylim = [(-71, 30), (-71, 30)]
         X_ylim = (-0.001, 0.10)
         nmda_ylim = [(0.0, 0.2), (0.0, 0.2 * 0.2)]
@@ -514,14 +423,8 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
         ymarginbottom2 = 0.2
         ymargintop = 0.25
     else:
-       #--------------------------------------
-       #3 Columns Helene this
-       #-------------------------------------
-
         starts = [2890, 2990]
         simlen = [1500, 11000]
-
-        #simlen = [0, 40000]
 
         #frequency protocol
         v_ylim = [(-71, 70), (-71, 70), (-71, -50)]
@@ -532,7 +435,6 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
 
         #gnmda traces
         vtracelim = [(0, 1.2e-4), (0, 1.2e-4), (0, 1e-4)]
-        #vtracelim = [(0, 25), (0, 25), (0, 25 * 0.1)]
         
         #Hill
         hilllimL = [(0, 1e-1), (0, 1e-1), (0, 5e-3)]
@@ -585,11 +487,9 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
 
         c0 = (0.8, 0.1, 0.1)  # delta trace
         c1 = (0.0, 0.0, 0.0)  # vmem
-        color1='darkgreen'#'mediumblue' #'dodgerblue'# 'lawngreen' #'purple' #'indigo' #'darkmagenta'
-        #color0='darkviolet'
-        color2='red'#'magenta'
-        #color1='forestgreen'
-        color3 = 'cyan'  # gNMDA nr2cd # AS
+        color1='darkgreen'
+        color2='red'
+        color3 = 'cyan'  # gNMDA nr2cd
 
         c11 = (0.2, 0.9, 0.2)  # thresh ltp
         c12 = (0.9, 0.2, 0.2)  # thresh ltd
@@ -617,18 +517,13 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
         l11 = r"$\theta_{+}$"
         l12 = r"$\theta_{+}$"
         #Vmem
-        #l21 = r"$\overline{V}_{+}$"
-        #l22 = r"$\overline{V}_{AB}$"
-        #l23 = r"$\overline{V}_{CD}$"
 
         #g nmda traces 
         l21 = r"$\overline{g}_{NMDA_{+}}$"
         l22 = r"$\overline{g}_{NMDA_{-}}$"
-        #l23 = r"$\overline{g}_{NMDA_{CD}}$"
 
         l31 = r"$\Phi_{NMDA_{+}}$"
         l32 = r"$\Phi_{NMDA_{-}}$"
-        #l33 = r"$\Phi_{NMDA_{CD}}$"
 
         l41 = r"$g_{NMDA_{GluN2A}}$"
         l42 = r"$g_{NMDA_{GluN2B}}$"
@@ -646,7 +541,6 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
             axs[0][axnum].scatter(pre_x, pre_y, label='pre', marker="v", s=500, color="blue")
         else:
             if axnum != 2:
-                #pre_x = np.arange(10, 200, 10)
                 pre_x = np.arange(10, 150, 10)
                 pre_y = [-60] * len(pre_x)
                 pre_y = [-77 for x in pre_x]
@@ -657,25 +551,11 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
             
             
             axs[0][axnum].scatter(pre_x, pre_y, label='pre', marker="v", s=60, color="blue")
-
-        #stop_axisAB=5000 #axis for A-B plots, one spike pair
         
         axs[1][axnum].plot(t, data["g_nr2a"]
                          [start:stop], c=color1, label=l41, linewidth=linewidth)
         axs[1][axnum].plot(t, data["g_nr2b"]
                          [start:stop], c=color2, label=l42, linewidth=linewidth)
-        #AS
-        #axs[1][axnum].plot(t, data["g_nr2cd"]
-        #                  [start:stop], c=color3, label=l43, linewidth=linewidth)
-
-        #Vmem trace
-        #axs[2][axnum].plot(t, data["v_trace1_threshed1"]
-        #                 [start:stop], c=color1, label=l21, linewidth=linewidth)
-        #axs[2][axnum].plot(t, data["v_trace2_threshed2"]
-        #                 [start:stop], c=color2, label=l22, linewidth=linewidth)
-        #axs[2][axnum].plot(t, data["v_trace3_threshed3"]
-        #                 [start:stop], c=color3, label=l23, linewidth=linewidth)
-
 
         #-------------------------------------------------------------------------------   
         #gnmda traces 1 - AB LT, 2 - AB LTD, 3 - CD LTD 
@@ -690,8 +570,6 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
 
         lineax31 = axs[3][axnum].plot(t, np.array(data["hilleq_ltp"]
                          [start:stop]), c=color1, label=l31, linewidth=linewidth)
-        #lineax32 = axs[3][axnum].plot(t, np.array(data["hilleq_ltd"] 
-        #                 [start:stop]), c=color2, label=l32, linewidth=linewidth)  #c=c31
         
         if enable_stdp:
             axs[0][axnum].annotate("", xy=(annotatex_delta[col][0], annotatey), xytext=(annotatex_delta[col][1], annotatey), xycoords='data',
@@ -705,7 +583,6 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
        
         #A5 Weights
         axs[4][axnum].plot(t, np.array(data["weight"][start:stop]) - data["weight"][start]+1, c=c5, label=l5, linewidth=linewidth)
-        #axs[4][col].plot(t, np.array(data["g_nmda_trace1"][start:stop]) * 1000, c=c4, label=l4)
 
         if col == 2 and not enable_stdp:
             timestart -= tstart_delta
@@ -716,7 +593,7 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
                 xticklabels = [str(int(x)) for x in xticks_forlabels]
                 ax[axnum].set_xticks(xticks)
                 ax[axnum].set_xticklabels(xticklabels)
-        #axs[0].set_ylabel("\delta trace")
+                
         axs[0][axnum].set_ylabel("mV", fontsize=label_size)
         axs[1][axnum].set_ylabel("nS", fontsize=label_size)
         lines00, labels00 = axs[0][axnum].get_legend_handles_labels()
@@ -745,9 +622,7 @@ def plot_generic_3columns(datas, enable_stdp=False, filename=""):
 
         axs[0][axnum].xaxis.label.set_color(c111[1])
         axs[0][axnum].tick_params(axis='y', colors=c111[1])
-        #axs[3][axnum].xaxis.label.set_color(color1)
         axs[3][axnum].tick_params(axis='y', colors=color1)
-        #ax3twin.xaxis.label.set_color(color3)
         ax3twin.tick_params(axis='y', colors=color2)
 
         for i in range(5):
@@ -800,7 +675,6 @@ color_STDP='blue'
 def plot_stdp_full_BP(data, filename=None):
     stdp_range = range(-100, 110, 10)
     x = [a["weight"][-1] for a in data]
-    #print(x)
     plt.figure()
     plt.margins(x=0, y=0) 
     plt.vlines(0.0, 0.5, 2.0, colors=(0.7, 0.7, 0.7), linestyles='dashed') #for 5 Hz
@@ -820,25 +694,17 @@ def plot_stdp_full_BP(data, filename=None):
 
 #-----------------------------------
 #STDP WW 5 pairs
-def plot_stdp_full_WW_5pairs(datas, filename=None, plotparam='weight', title=None):
+def plot_stdp_full_WW_5pairs(datas, filename=None, plotparam='weight'):
     plt.figure()
     plt.margins(x=0, y=0) 
     
-    #plt.vlines(0.0, 0.5, 2.0, colors=(1, 1, 1 ), linestyles='dashed')
-    #plt.hlines(1.0, -100.0, 100.0, colors=(1, 1, 1), linestyles='dashed')
-    
     #y axis
     #plt.vlines(0.0, 0.5, 2.0, colors=(0.7, 0.7, 0.7), linestyles='dashed') #for BP 5 Hz
-    
     plt.vlines(0.0, 0.8, 1.6, colors=(0.7, 0.7, 0.7), linestyles='dashed') #for 1 Hz 
-
     plt.hlines(1.0, -100.0, 100.0, colors=(0.7, 0.7, 0.7), linestyles='dashed') 
     stdp_range = range(-100, 110, 10)
     for idx, data in enumerate(datas):
         x = [a[plotparam][-1] for a in data]
-        #print('STDP')
-        #print(x)
-        #plt.plot(stdp_range, x, c=(idx/len(datas), 1.0 - idx/len(datas), 0.1))
 
         plt.plot(stdp_range, x, c=color_STDP, linewidth=linewidth_STDP_full_WW_5pairs )
     
@@ -846,8 +712,6 @@ def plot_stdp_full_WW_5pairs(datas, filename=None, plotparam='weight', title=Non
     plt.ylabel("Relative weight change", fontsize=20)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    #if title:
-    #    plt.title(title)
     plt.tight_layout()
     
     if filename == None:
@@ -856,21 +720,15 @@ def plot_stdp_full_WW_5pairs(datas, filename=None, plotparam='weight', title=Non
 
 #-------------------------------------
 #STDP WW 60 pairs
-def plot_stdp_full_WW_60pairs(datas, filename=None, plotparam='weight', title=None):
+def plot_stdp_full_WW_60pairs(datas, filename=None, plotparam='weight'):
     plt.figure()
     plt.margins(x=0, y=0) 
-    
-    #plt.vlines(0.0, 0.5, 2.0, colors=(1, 1, 1 ), linestyles='dashed')
-    #plt.hlines(1.0, -100.0, 100.0, colors=(1, 1, 1), linestyles='dashed')
     
     plt.vlines(0.0, 0.5, 2.0, colors=(0.7, 0.7, 0.7), linestyles='dashed')
     plt.hlines(1.0, -100.0, 100.0, colors=(0.7, 0.7, 0.7), linestyles='dashed')
     stdp_range = range(-100, 110, 10)
     for idx, data in enumerate(datas):
         x = [a[plotparam][-1] for a in data]
-        #print('STDP')
-        #print(x)
-        #plt.plot(stdp_range, x, c=(idx/len(datas), 1.0 - idx/len(datas), 0.1))
 
         plt.plot(stdp_range, x, c=color_STDP, linewidth=linewidth_STDP_full )
     
@@ -878,8 +736,6 @@ def plot_stdp_full_WW_60pairs(datas, filename=None, plotparam='weight', title=No
     plt.ylabel("Relative weight change", fontsize=20)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    #if title:
-    #    plt.title(title)
     plt.tight_layout()
     
     if filename == None:
@@ -892,21 +748,15 @@ def plot_stdp_full_WW_60pairs(datas, filename=None, plotparam='weight', title=No
 #STDP WW
 
 
-def plot_stdp_multiple(datas, filename=None, plotparam='weight', title=None):
+def plot_stdp_multiple(datas, filename=None, plotparam='weight'):
     plt.figure()
     plt.margins(x=0, y=0) 
-    
-    #plt.vlines(0.0, 0.5, 2.0, colors=(1, 1, 1 ), linestyles='dashed')
-    #plt.hlines(1.0, -100.0, 100.0, colors=(1, 1, 1), linestyles='dashed')
     
     plt.vlines(0.0, 0.5, 2.0, colors=(0.7, 0.7, 0.7), linestyles='dashed')
     plt.hlines(1.0, -100.0, 100.0, colors=(0.7, 0.7, 0.7), linestyles='dashed')
     stdp_range = range(-100, 110, 10)
     for idx, data in enumerate(datas):
         x = [a[plotparam][-1] for a in data]
-        #print('STDP')
-        #print(x)
-        #plt.plot(stdp_range, x, c=(idx/len(datas), 1.0 - idx/len(datas), 0.1))
 
         plt.plot(stdp_range, x, c=color_STDP, linewidth=linewidth_STDP_full )
     
@@ -914,8 +764,6 @@ def plot_stdp_multiple(datas, filename=None, plotparam='weight', title=None):
     plt.ylabel("Relative weight change", fontsize=20)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    #if title:
-    #    plt.title(title)
     plt.tight_layout()
     
     if filename == None:

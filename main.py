@@ -43,7 +43,7 @@ frequency_STDP_WW_60pairs=5
 def Fig3A_STDP_WW_60pairs():
     print('Fig3A STDP_WW_60pairs_5Hz')
     results_multiple = []
-    for item in [0]:#np.arange(1,100,10):
+    for item in [0]:
         synparams = {}
         results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_60pairs, frequency = frequency_STDP_WW_60pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
@@ -58,11 +58,8 @@ frequency_STDP_WW_5pairs=5
 def Fig3B_STDP_WW_5pairs():
     print('Fig3B STDP_WW_5pairs_5Hz')
     results_multiple = []
-    for item in [0]:#np.arange(1,100,10):
+    for item in [0]:
         synparams = {}
-        # synparams = {
-        #     'dirac_trace_tau': item
-        # }
         results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_5pairs, frequency = frequency_STDP_WW_5pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
     plot_stdp_full_WW_5pairs(results_multiple, filename="figures/Fig3B_STDP_WW_5pairs_5Hz.png")
@@ -77,11 +74,8 @@ frequency_STDP_WW_30pairs=1
 def Fig3C_STDP_WW_30pairs():
     print('Fig3C STDP_WW_30pairs_1Hz')
     results_multiple = []
-    for item in [0]:#np.arange(1,100,10):
+    for item in [0]:
         synparams = {}
-        # synparams = {
-        #     'dirac_trace_tau': item
-        # }
         results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_30pairs, frequency = frequency_STDP_WW_30pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
     plot_stdp_full_WW_5pairs(results_multiple, filename="figures/Fig3C STDP_WW_30pairs_1Hz.png")
@@ -96,8 +90,6 @@ frequency_STDP_BP=5
 def Fig3D_STDP_BP():
     print('Fig3D STDP_BP')
     results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_BP, frequency = frequency_STDP_BP, w_mult = 10, nr2bbar_mult = 1, save_last_record_only=True)
-    #results = PylediPlasticity.run_stdp_tests_static(pairings = 60, frequency = 5, w_mult = 10, nr2bbar_mult = 1)
-    #plot_stdp(results)
     plot_stdp_full_BP(results, filename="figures/Fig3D_STDP_BP.png")
 
 #------------------------------------------------------------------
@@ -115,7 +107,7 @@ def Fig4A_STDP_PostSpikes_Barplot():
         results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_SpikeCount, frequency = frequency_SpikeCount, w_mult = 10, nr2bbar_mult=1, post_spikes = post_spike, synparams = synparams, stdp_range=[10], first_post=True, save_last_record_only=True)
         results_multiple.append(results[0]['weight'][-1])
         
-   
+
     plt.figure()
     plt.margins(x=0, y=0) 
 
@@ -123,13 +115,9 @@ def Fig4A_STDP_PostSpikes_Barplot():
     plt.yticks(fontsize=16)
     label_size=20
 
-   
-
     ax = plt.subplot()
     ax.set_axisbelow(True)
-    #ax.grid(color='blue', linestyle='dashed')
     ax.bar([str(f"{x}") for x in postspikes], results_multiple, width=0.4, color='blue')
-    #ax.scatter(np.arange(0, 5), [190, 185, 125, 120, 75], marker="*", color=(0.6, 0.1, 0.9), s=1000, label="Experimental data")
     label_size = 20
     tick_size = 16
     ax.set_xlim([-0.5, 3.5])
@@ -147,13 +135,12 @@ def Fig4A_STDP_PostSpikes_Barplot():
 def Fig4B_STDP_Freq_Barplot():
     print("Fig4B Frequency Bar plot for pre-post ")
     results_multiple = []
-    frequencies = [1, 5, 10, 20, 30, 40, 50 ]# [1, 3, 5, 10] #[5, 10, 15 ,20 ] #
+    frequencies = [1, 5, 10, 20, 30, 40, 50 ]
     for freq in frequencies:
         synparams = {}
         results = PylediPlasticity.run_stdp_tests_static(pairings = 20, frequency = freq, w_mult = 10, nr2bbar_mult=1, post_spikes = 1, synparams = synparams, stdp_range=[10], first_post=True, save_last_record_only=True)
         results_multiple.append(results[0]['weight'][-1])
         
-    #plt.figure(figsize=(14,10))
     plt.figure()
     plt.margins(x=0, y=0) 
 
@@ -202,7 +189,6 @@ if __name__ == '__main__':
     Path(FIGURES_DIR).mkdir(parents=True, exist_ok=True)
 
 #------------------------------
-      
     
     #-------------------------------
     #Fig 2 Traces WW   
@@ -225,6 +211,4 @@ if __name__ == '__main__':
     Fig5_Freq_Dependent_3Columns() 
 
     
-           
-    print("\nDONE")    
-    
+    print("\nDONE")
