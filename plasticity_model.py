@@ -319,7 +319,7 @@ class PylediPlasticity:
     def net_receive(self):
         self.pre_dirac = self.A_dirac
 
-    def update(self):        
+    def update(self):
         self.I_AMPA = self.g_ampa * (self.v - self.E_AMPA)
         self.I_NMDA = self.g_nmda * (self.v - self.E_NMDA) * self.nmdabar
         self.synInputs = self.I_AMPA + self.I_NMDA

@@ -14,92 +14,83 @@ def run_freq_single_processing(data, nmdabar_mult=1, ampabar_mult=1):
     return (model, frequency, pairings)
 
 
-#---------------------------------------------------------
-#Bi & Poo
-#---------------------------------------------------------
-
-
-
 #----------------------------------------------------------
-# Fig 2 STDP traces WW LTP and LTD
+# Fig 2: STDP traces LTP and LTD
 
-pairings_STDP_WW_2Columns=4
-frequency_STDP_WW_2Columns=5
+pairings_STDP_2Columns=4
+frequency_STDP_2Columns=5
 
-def Fig2_STDP_2Columns_WW():
-    print('STDP_2Columns_WW')
+def Fig2():
+    print('Running Fig2 ...')
     dtdict = dict([(i, x) for (x, i) in enumerate(range(-100, 110, 10))])
-    data = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_2Columns, frequency = frequency_STDP_WW_2Columns, w_mult = 10, nr2bbar_mult = 1, post_spikes = 2)
+    data = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_2Columns, frequency = frequency_STDP_2Columns, w_mult = 10, nr2bbar_mult = 1, post_spikes = 2)
     DT = 10
-    datas = [data[dtdict[DT]], data[dtdict[-DT]]] #AS
-    plot_generic_2columns(datas, enable_stdp=True, filename=f"Fig2_STDP_2Columns_WW.png", options={"reduce_X_axis": 1, "dt": DT})
+    datas = [data[dtdict[DT]], data[dtdict[-DT]]]
+    plot_2columns(datas, filename=f"Fig2.png")
 
 #----------------------------------------------------------
-#Fig 3A STDP WW asymetrical
+#Fig 3A: STDP LTD LTP LTD
 
-pairings_STDP_WW_60pairs=60
-frequency_STDP_WW_60pairs=5 
+pairings_STDP_60pairs=60
+frequency_STDP_60pairs=5 
 
-def Fig3A_STDP_WW_60pairs():
-    print('Fig3A STDP_WW_60pairs_5Hz')
+def Fig3A():
+    print('Running Fig3A ...')
     results_multiple = []
     for item in [0]:
         synparams = {}
-        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_60pairs, frequency = frequency_STDP_WW_60pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
+        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_60pairs, frequency = frequency_STDP_60pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
-    plot_stdp_full_WW_60pairs(results_multiple, filename="figures/Fig3A_STDP_WW_60pairs_5Hz.png")
+    plot_stdp_full_60pairs(results_multiple, filename="figures/Fig3A.png")
     
 #----------------------------------------------------------
 
-#Fig 3B STDP WW LTP
-pairings_STDP_WW_5pairs=5
-frequency_STDP_WW_5pairs=5
+#Fig 3B: STDP LTP
+pairings_STDP_5pairs=5
+frequency_STDP_5pairs=5
 
-def Fig3B_STDP_WW_5pairs():
-    print('Fig3B STDP_WW_5pairs_5Hz')
+def Fig3B():
+    print('Running Fig3B ...')
     results_multiple = []
     for item in [0]:
         synparams = {}
-        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_5pairs, frequency = frequency_STDP_WW_5pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
+        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_5pairs, frequency = frequency_STDP_5pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
-    plot_stdp_full_WW_5pairs(results_multiple, filename="figures/Fig3B_STDP_WW_5pairs_5Hz.png")
+    plot_stdp_full_5pairs(results_multiple, filename="figures/Fig3B.png")
     
 #----------------------------------------------------------
 
+#Fig 3C: STDP LTD
+pairings_STDP_30pairs=30
+frequency_STDP_30pairs=1
 
-#Fig 3C STDP WW LTD
-pairings_STDP_WW_30pairs=30
-frequency_STDP_WW_30pairs=1
-
-def Fig3C_STDP_WW_30pairs():
-    print('Fig3C STDP_WW_30pairs_1Hz')
+def Fig3C():
+    print('Running Fig3C ...')
     results_multiple = []
     for item in [0]:
         synparams = {}
-        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_WW_30pairs, frequency = frequency_STDP_WW_30pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
+        results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_30pairs, frequency = frequency_STDP_30pairs, w_mult = 10, post_spikes = 2, synparams = synparams)
         results_multiple.append(results)
-    plot_stdp_full_WW_5pairs(results_multiple, filename="figures/Fig3C STDP_WW_30pairs_1Hz.png")
+    plot_stdp_full_5pairs(results_multiple, filename="figures/Fig3C.png")
 
 #--------------------------------------------------------
 
-
-#Fig 3D Bi & Poo
-#STDP Bi & Poo: 1 Pre - 1 Post
-pairings_STDP_BP=60
-frequency_STDP_BP=5
-def Fig3D_STDP_BP():
-    print('Fig3D STDP_BP')
-    results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP_BP, frequency = frequency_STDP_BP, w_mult = 10, nr2bbar_mult = 1, save_last_record_only=True)
-    plot_stdp_full_BP(results, filename="figures/Fig3D_STDP_BP.png")
+#Fig 3D: STDP 1 Pre - 1 Post
+pairings_STDP=60
+frequency_STDP=5
+def Fig3D():
+    print('Running Fig3D ...')
+    results = PylediPlasticity.run_stdp_tests_static(pairings = pairings_STDP, frequency = frequency_STDP, w_mult = 10, nr2bbar_mult = 1, save_last_record_only=True)
+    plot_stdp_full_BP(results, filename="figures/Fig3D.png")
 
 #------------------------------------------------------------------
 
-# Number of post spikes pre-(1-4) post
+#Fig 4A: Number of post spikes 1-4
 frequency_SpikeCount = 5
 pairings_SpikeCount = 30
 
-def Fig4A_STDP_PostSpikes_Barplot():
-    print("Fig4A Number of spikes Bar plot for pre-(1-4)post")
+def Fig4A():
+    print("Running Fig4A ...")
     results_multiple = []
     postspikes = [1, 2, 3, 4]
     for post_spike in postspikes:
@@ -109,13 +100,13 @@ def Fig4A_STDP_PostSpikes_Barplot():
         
 
     plt.figure()
+    ax = plt.subplot()
     plt.margins(x=0, y=0) 
 
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
     label_size=20
 
-    ax = plt.subplot()
     ax.set_axisbelow(True)
     ax.bar([str(f"{x}") for x in postspikes], results_multiple, width=0.4, color='blue')
     label_size = 20
@@ -124,16 +115,15 @@ def Fig4A_STDP_PostSpikes_Barplot():
     ax.set_ylim([0, 2.5])
     ax.set_ylabel("Relative weight change", fontsize=label_size)
     ax.set_xlabel("# of postsynaptic spikes", fontsize=label_size)
-    ax.legend(fontsize=20)
     ax.tick_params(labelsize=tick_size)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIGURES_DIR, "Fig4A_STDP_SpikePost_Barplot.png"))
+    plt.savefig(os.path.join(FIGURES_DIR, "Fig4A.png"))
 
 #------------------------------------------------------------------
-# Freq of pre-post
+# Fig 4B: Frequency of pre-post
 
-def Fig4B_STDP_Freq_Barplot():
-    print("Fig4B Frequency Bar plot for pre-post ")
+def Fig4B():
+    print("Running Fig4B ...")
     results_multiple = []
     frequencies = [1, 5, 10, 20, 30, 40, 50 ]
     for freq in frequencies:
@@ -142,13 +132,14 @@ def Fig4B_STDP_Freq_Barplot():
         results_multiple.append(results[0]['weight'][-1])
         
     plt.figure()
+    ax = plt.subplot() 
     plt.margins(x=0, y=0) 
 
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
     label_size=20
 
-    ax = plt.subplot() 
+    
     ax.set_axisbelow(True)
     
     ax.plot(frequencies, results_multiple, linewidth=4, color='blue')
@@ -162,24 +153,21 @@ def Fig4B_STDP_Freq_Barplot():
     tick_size = 16
     ax.set_ylabel("Relative weight change", fontsize=label_size)
     ax.set_xlabel("Frequency of pre-post pairings, Hz", fontsize=label_size)
-    ax.legend(fontsize=20)
     ax.tick_params(labelsize=tick_size)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIGURES_DIR, "Fig4B_STDP_dt10_Freq_Line.png"))
+    plt.savefig(os.path.join(FIGURES_DIR, "Fig4B.png"))
 
 
 
 #----------------------------------------------------------
-#Fig 5 Three columns, LTP, LTP and LTD
-def Fig5_Freq_Dependent_3Columns():
-    print('Fig5 Freq_Dependent_3Columns()')
+#Fig 5: Frequency dependent LTP, LTP and LTD
+
+def Fig5():
+    print('Running Fig5 ...')
     (model1, _, _) = run_freq_single_processing((100, 100), nmdabar_mult=1, ampabar_mult=0.5)
     (model2, _, _) = run_freq_single_processing((100, 100), nmdabar_mult=1)
     (model3, _, _) = run_freq_single_processing((1, 3), nmdabar_mult=1)
-    plot_generic_3columns([model1.run_data, model2.run_data, model3.run_data], enable_stdp=False, filename=f"Fig5_Freq_Dependent_3Columns.png")
-
-
-
+    plot_3columns([model1.run_data, model2.run_data, model3.run_data], filename=f"Fig5_Freq_Dependent_3Columns.png")
 
 #----------------------------------------------------------
 
@@ -188,27 +176,14 @@ if __name__ == '__main__':
     FIGURES_DIR = "figures"
     Path(FIGURES_DIR).mkdir(parents=True, exist_ok=True)
 
-#------------------------------
-    
-    #-------------------------------
-    #Fig 2 Traces WW   
-    #Fig2_STDP_2Columns_WW()
+    #Plot figures 
+    Fig2()
+    Fig3A()
+    Fig3B()
+    Fig3C()
+    Fig3D()
+    Fig4A() 
+    Fig4B() 
+    Fig5() 
 
-    #------------------------------
-    #Fig 3 STDP WW and BP 
-    #Fig3A_STDP_WW_60pairs()
-    #Fig3B_STDP_WW_5pairs()
-    #Fig3C_STDP_WW_30pairs()
-    #Fig3D_STDP_BP()
-    
-    #------------------------------
-    #Fig 4 f and # of spikes
-    #Fig4A_STDP_PostSpikes_Barplot() 
-    #Fig4B_STDP_Freq_Barplot() #Bars
-
-    #---------------------------------------------
-    #Frequency-dependent LTP and LTD
-    Fig5_Freq_Dependent_3Columns() 
-
-    
-    print("\nDONE")
+    print("Done")
