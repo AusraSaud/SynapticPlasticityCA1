@@ -124,7 +124,6 @@ def Fig4B():
 #----------------------------------------------------------
 def Fig5():
     print('Running Fig5 ...')
-    # TODO: need A_LTP and A_LTD to be /10
     (model1, _, _) = run_freq_single_processing((100, 100), ampabar_multiplier=0.5)
     (model2, _, _) = run_freq_single_processing((100, 100))
     (model3, _, _) = run_freq_single_processing((1, 3))
