@@ -1,3 +1,10 @@
+#Dainauskas JJ, Marie H, Migliore M and Saudargiene A.  
+#GluN2B-NMDAR subunit contribution on synaptic plasticity: a phenomenological model for CA3-CA1 synapses
+#Frontiers in Synaptic Neuroscience 2023 DOI: 10.3389/fnsyn.2023.1113957.
+
+#Neuron model 
+#Two compartmental Pinsky-Rinzel (1994), Fegusoon-Cambell (2009) 
+
 import numpy as np
 
 class CA1_NeuronModel():

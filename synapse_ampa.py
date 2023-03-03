@@ -1,5 +1,10 @@
-import numpy as np
+#Dainauskas JJ, Marie H, Migliore M and Saudargiene A.  
+#GluN2B-NMDAR subunit contribution on synaptic plasticity: a phenomenological model for CA3-CA1 synapses
+#Frontiers in Synaptic Neuroscience 2023 DOI: 10.3389/fnsyn.2023.1113957
 
+#AMPA synapse model 
+
+import numpy as np
 
 class Synapse_AMPA:
     def __init__(self, dt, ampabar = 1):

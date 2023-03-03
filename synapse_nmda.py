@@ -1,8 +1,14 @@
+#Dainauskas JJ, Marie H, Migliore M and Saudargiene A.  
+#GluN2B-NMDAR subunit contribution on synaptic plasticity: a phenomenological model for CA3-CA1 synapses
+#Frontiers in Synaptic Neuroscience 2023 DOI: 10.3389/fnsyn.2023.1113957
+
+#NMDA synapse model 
+
 import numpy as np
 
 
 class Synapse_NMDA:
-    def __init__(self, dt, nmdabar = 5e-3, nr2bbar_mult = 1, nmdabar_nr2cd = 1e-5):
+    def __init__(self, dt, nmdabar = 1e-3, nmdabar_nr2cd = 1e-5):
         self.nmdabar_nr2cd = nmdabar_nr2cd
         self.Cdur = 1
         self.mg = 1
@@ -48,7 +54,7 @@ class Synapse_NMDA:
         self.v = 0
         self.gNMDAbar = nmdabar
         self.gNR2Abar = 1
-        self.gNR2Bbar = 1 * nr2bbar_mult
+        self.gNR2Bbar = 1
         self.gnmda = 0
         self.Rinf = 0
         self.Rtau = 0
